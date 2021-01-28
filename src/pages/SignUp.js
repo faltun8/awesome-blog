@@ -14,19 +14,27 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Copyright from "../components/Copyright";
+import axios from "axios";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
+
+
+
+async function register({ username, email, password, password2 }) {
+  
+  await axios.post("https://blog-backend-django.herokuapp.com/api/user/register/", {
+    username,
+    email,
+    password,
+    password2,
+  }
+     
+  )
+  .then(res => console.log(res))
+  .catch(error => console.log(error))
 }
+
+
 
 const signUpValidationSchema = Yup.object().shape({
   username: Yup.string().required("Display name is required!!!"),
@@ -37,7 +45,7 @@ const signUpValidationSchema = Yup.object().shape({
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
-    
+
   password2: Yup.string()
     .required()
     .label("Confirm password")
@@ -80,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  
 
   const formik = useFormik({
     initialValues: {
@@ -90,7 +99,8 @@ export default function SignUp() {
     },
     validationSchema: signUpValidationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values);
+      register(values)
     },
   });
 
@@ -131,7 +141,6 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
-           
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.errors.email}

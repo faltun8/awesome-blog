@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -14,24 +13,26 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Copyright from "../components/Copyright";
-import axios from "axios";
+import Copyright from '../components/Copyright'
+import axios from 'axios'
 
-async function login({  email, password }) {
-  console.log( email, password)
-  await axios.post("https://blog-backend-django.herokuapp.com/dj-rest-auth/login/", {
-    email,
-    password,
+
+async function forgetPasswordTriger({email}) {
+  
+  await axios
+  .post("https://blog-backend-django.herokuapp.com/dj-rest-auth/password/reset/", {
+    email
   }
-     
   )
   .then(res => console.log(res))
   .catch(error => console.log(error))
 }
 
-const signInValidationSchema = Yup.object().shape({
+
+
+const forgetPasswordValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required!!!"),
-  password: Yup.string().required("No password provided."),
+
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -66,18 +67,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function ForgetPassword() {
   const classes = useStyles();
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
-    validationSchema: signInValidationSchema,
+    validationSchema: forgetPasswordValidationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      login(values);
+      forgetPasswordTriger(values)
     },
   });
 
@@ -91,10 +90,9 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forget Password
           </Typography>
           <form className={classes.form} onSubmit={formik.handleSubmit}>
-           
             <TextField
               variant="standard"
               margin="normal"
@@ -104,30 +102,13 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.errors.email}
               helperText={formik.errors.email}
             />
-            <TextField
-              variant="standard"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.errors.password}
-              helperText={formik.errors.password}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+         
             <Button
               type="submit"
               fullWidth
@@ -135,20 +116,9 @@ export default function SignIn() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Submit
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/forget-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            
             <Box mt={5}>
               <Copyright />
             </Box>

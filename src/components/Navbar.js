@@ -12,7 +12,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-  const history = useHistory();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -58,6 +57,7 @@ export default function Navbar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            href="/"
           >
             <PostAddIcon />
           </IconButton>
