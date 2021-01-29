@@ -16,25 +16,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Copyright from "../components/Copyright";
 import axios from "axios";
-
-
-
-
-async function register({ username, email, password, password2 }) {
-  
-  await axios.post("https://blog-backend-django.herokuapp.com/api/user/register/", {
-    username,
-    email,
-    password,
-    password2,
-  }
-     
-  )
-  .then(res => console.log(res))
-  .catch(error => console.log(error))
-}
-
-
+import { useHistory } from "react-router-dom";
 
 const signUpValidationSchema = Yup.object().shape({
   username: Yup.string().required("Display name is required!!!"),
@@ -88,7 +70,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  
+  const history = useHistory();
+
+  async function register({ username, email, password, password2 }) {
+    await axios
+      .post("https://blog-backend-django.herokuapp.com/api/user/register/", {
+        username,
+        email,
+        password,
+        password2,
+      })
+      .then((res) => {
+        console.log(res);
+        history.push("/login");
+      })
+      .catch((error) => console.log(error));
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -100,7 +97,7 @@ export default function SignUp() {
     validationSchema: signUpValidationSchema,
     onSubmit: (values) => {
       console.log(values);
-      register(values)
+      register(values);
     },
   });
 
