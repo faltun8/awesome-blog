@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "white",
       color: "#FF0102",
     },
- 
   },
   displayName: {
     margin: 10,
@@ -95,6 +94,9 @@ export default function Navbar() {
         history.push("/login");
       })
       .catch((err) => console.log(err));
+  };
+  const handleProfile = () => {
+    history.push("/profile");
   };
 
   return (
@@ -180,8 +182,8 @@ export default function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                 <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
               </Menu>
             </div>

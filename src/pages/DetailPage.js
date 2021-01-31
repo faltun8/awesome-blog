@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailPage() {
   const { state } = useLocation();
   const [postDetail, setPostDetail] = useState([]);
-  const [isLiked, setIsLiked] = useState(true)
+  const [isLiked, setIsLiked] = useState(true);
   const mySlug = state.slug;
   const classes = useStyles();
   // console.log(state.slug);
@@ -170,17 +170,13 @@ export default function DetailPage() {
       });
   }
 
-
   async function userInfo(mySlug) {
     await axios
-      .get(
-        `https://blog-backend-django.herokuapp.com/api/${mySlug}/`,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      )
+      .get(`https://blog-backend-django.herokuapp.com/api/${mySlug}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
       .then((res) => setIsLiked(res.data.has_liked))
       .catch(function (error) {
         console.log(error);
@@ -204,7 +200,9 @@ export default function DetailPage() {
             </div>
             <Typography>
               <CardActionArea onClick={() => handleLike(mySlug)}>
-                <FavoriteIcon className={isLiked ? classes.liked : classes.notLiked} />
+                <FavoriteIcon
+                  className={isLiked ? classes.liked : classes.notLiked}
+                />
 
                 <span className={classes.iconCount}>
                   {postDetail.get_like_count}
@@ -231,7 +229,7 @@ export default function DetailPage() {
         </Header>
 
         {postDetail?.comments?.map((comment) => (
-          <Comment.Group item sm={4} xs={12} key={comment?.id}>
+          <Comment.Group item sm={4} xs={12} key={comment?.id.toString()}>
             <Comments
               myUser={comment?.user}
               myDate={comment?.time_stamp}

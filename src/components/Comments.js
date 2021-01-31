@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Comment } from "semantic-ui-react";
 import { formatDateFunc } from "../helper/FormatDate";
 
-
-export default function Comments({myUser, myDate, myContent}) {
+export default function Comments({ myUser, myDate, myContent }) {
   return (
     <Comment>
       <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />

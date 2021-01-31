@@ -5,7 +5,9 @@ import HomePage from "../pages/HomePage";
 import ForgetPassword from "../pages/ForgetPassword";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Profile from "../pages/Profile";
+import PostCreate from "../pages/PostCreate";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function AppRouter() {
   return (
@@ -16,6 +18,8 @@ function AppRouter() {
         <Route exact path="/login" component={SignIn} />
         <Route exact path="/forget-password" component={ForgetPassword} />
         <Route exact path="/detail-page" component={DetailPage} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/post-create" component={PostCreate} />
         <Route path="/" component={HomePage} />
       </Switch>
     </Router>
