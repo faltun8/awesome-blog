@@ -103,7 +103,7 @@ export default function DetailPage() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    console.log("test");
+    //console.log("test");
     if (token) {
       getPostDetails(mySlug);
       userInfo(mySlug);
@@ -124,11 +124,11 @@ export default function DetailPage() {
       .then((res) => setPostDetail(res.data))
       .then(console.log("P", postDetail));
   }
-  console.log(postDetail.comments);
+  // console.log(postDetail.comments);
 
   async function postComment(comment, mySlug) {
-    console.log(comment);
-    console.log(mySlug);
+    //console.log(comment);
+    //console.log(mySlug);
     await axios
       .post(
         `https://blog-backend-django.herokuapp.com/api/comment/${mySlug}/`,
@@ -137,7 +137,7 @@ export default function DetailPage() {
           headers: { Authorization: `Token ${token}` },
         }
       )
-      .then(console.log("veri gittiiiiiiiiiiii"))
+      //.then(console.log("veri gittiiiiiiiiiiii"))
       .then(getPostDetails(mySlug))
       .catch((error) => console.log(error));
   }

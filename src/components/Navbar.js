@@ -54,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
-  console.log("currentUser", currentUser?.data?.username);
+  //console.log("currentUser", currentUser?.data?.username);
   const [auth, setAuth] = useState(false);
   useEffect(() => {
-    console.log(currentUser);
+    //console.log(currentUser);
     if (currentUser == null) {
       setAuth(false);
     } else {

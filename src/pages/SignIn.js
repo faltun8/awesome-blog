@@ -9,7 +9,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -53,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-   
   },
 }));
 
@@ -71,13 +69,13 @@ export default function SignIn() {
         password,
       })
       .then((data) => {
-        console.log("all data",data.data.key);
+        // console.log("all data",data.data.key);
         localStorage.setItem("token", data.data.key);
-        console.log("user", data.data);
+        //console.log("user", data.data);
         setCurrentUser(data);
-        console.log("current user", currentUser)
+        // console.log("current user", currentUser)
         setLoggedIn(true);
-        console.log("loggediN",loggedIn);
+        //console.log("loggediN",loggedIn);
         window.location.href = "/";
       })
       .catch((error) => console.log(error));
@@ -90,9 +88,8 @@ export default function SignIn() {
     },
     validationSchema: signInValidationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      //console.log(values);
       login(values);
-     
     },
   });
 
