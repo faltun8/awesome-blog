@@ -1,5 +1,5 @@
 {
-  "name": "awesome-blog",
+  "name": "blog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/markdown-to-jsx": "^6.11.3",
     "axios": "^0.21.1",
-    "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "formik": "^2.2.6",
     "markdown-to-jsx": "^7.1.1",
